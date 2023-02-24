@@ -1,0 +1,9 @@
+# output classes from MSC analysis
+ae aegypti
+an arabiensis
+an coustani
+an funestus ss
+an squamosus
+culex pipiens complex
+ma africanus
+ma uniformis
