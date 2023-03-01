@@ -38,16 +38,19 @@ probs = np.zeros((1,len(species)))
 # 6 med_stop_time
 # 7-14 ae aegypti,an arabiensis,an coustani,an funestus ss,an squamosus,culex pipiens complex,ma africanus,ma uniformis
 with open(sys.argv[1], "rt") as f:
+    MED_prob_thresh = sys.argv[2]
     while True:
         line = f.readline()
         if not line:
             break
         else:
             fields = line.split(',')
-            for m in range(len(dates)):
-                if (dates[m] in fields[1]):
-                    for n in range(len(species)):
-                        counts[m,n] += float(fields[7+n])
+            MED_prob = fields[3]
+            if (MED_prob > MED_prob_thresh):
+                for m in range(len(dates)):
+                    if (dates[m] in fields[1]):
+                        for n in range(len(species)):
+                            counts[m,n] += float(fields[7+n])
 f.close()
 
 # print the results
