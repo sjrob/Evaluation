@@ -27,6 +27,10 @@ f_dates.close()
 counts = np.zeros((len(dates),len(species)))
 probs = np.zeros((1,len(species)))
 
+# read the relevant probability thresholds
+MED_prob_thresh = float(sys.argv[2])
+MSC_prob_thresh = float(sys.argv[3])
+
 # open and read the file (or pipe) data csv
 # format is
 # 0 uuid
@@ -38,19 +42,20 @@ probs = np.zeros((1,len(species)))
 # 6 med_stop_time
 # 7-14 ae aegypti,an arabiensis,an coustani,an funestus ss,an squamosus,culex pipiens complex,ma africanus,ma uniformis
 with open(sys.argv[1], "rt") as f:
-    MED_prob_thresh = sys.argv[2]
     while True:
         line = f.readline()
         if not line:
             break
         else:
             fields = line.split(',')
-            MED_prob = fields[3]
+            MED_prob = float(fields[3])
             if (MED_prob > MED_prob_thresh):
                 for m in range(len(dates)):
                     if (dates[m] in fields[1]):
                         for n in range(len(species)):
-                            counts[m,n] += float(fields[7+n])
+                            MSC_prob = float(fields[7+n])
+                            if (MSC_prob > MSC_prob_thresh):
+                                counts[m,n] += MSC_prob
 f.close()
 
 # print the results
@@ -62,5 +67,6 @@ print("\r")
 for m in range(len(dates)):
     print("%s" % (dates[m]), end='')
     for n in range(len(species)):
-        print(", %d" % (counts[m,n]), end='')
+        # print using %.0f, which will print integer rounded up
+        print(", %.0f" % (counts[m,n]), end='')
     print("\r")
