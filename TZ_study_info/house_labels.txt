@@ -1,0 +1,1 @@
+"Aedes sp.", "Anopheles coustani", "Anopheles funestus", "Anopheles gambiae s.l.", "Anopheles maculipalpis", "Anopheles pharoensis", "Anopheles rufipes", "Anopheles squamosus", "Anopheles wellcomei", "Anopheles ziemanni", "Coquilettidia sp.", "Culex sp.", "Mansonia sp.", "NA", "Taxon_TX"
